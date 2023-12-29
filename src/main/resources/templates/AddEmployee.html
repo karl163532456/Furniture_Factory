@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet " href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<section class="vh-100">
+<!--    <div th:include="~{block/nav :: adminNav}"/>-->
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                     class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <form enctype="multipart/form-data" th:action="@{/admin/addEmployee}" method="post" th:object="${user}">
+                    <!-- Email input "-->
+
+                    <div class="form-outline mb-4">
+                        <input type="text" name="name" th:field="*{name}" id="form1Example13"
+                               class="form-control form-control-lg"/>
+                        <label class="form-label" for="form1Example13">name</label>
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" name="surname" th:field="*{surname}" id="form1Example23"
+                               class="form-control form-control-lg"/>
+                        <label class="form-label" for="form1Example23">surname</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" name="patronymic" th:field="*{patronymic}" id="form1Example33"
+                               class="form-control form-control-lg"/>
+                        <label class="form-label" for="form1Example23">patronymic</label>
+                    </div>
+
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="date" name="dateOfBirth" th:field="*{dateOfBirth}" id="form1Example43"
+                               class="form-control form-control-lg"/>
+                        <label class="form-label" for="form1Example23">dateOfBirth</label>
+                    </div>
+
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" name="jobTitle" th:field="*{jobTitle}" id="form1Example53"
+                               class="form-control form-control-lg"/>
+                        <label class="form-label" for="form1Example23">jobTitle</label>
+                    </div>
+
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" name="login" th:field="*{login}" id="form1Example63"
+                               class="form-control form-control-lg"/>
+                        <label class="form-label" for="form1Example23">login</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="text" name="password" th:field="*{password}" id="form1Example73"
+                               class="form-control form-control-lg"/>
+                        <label class="form-label" for="form1Example23">Password</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="file" name="image" accept="image/*"   class="form-control-file">
+
+                        <label class="form-label" for="form1Example23">photo</label>
+                    </div>
+<!--                    <div class="form-outline mb-4">-->
+<!--                        <p>Role</p>-->
+<!--                        <input type="radio" name="Role" th:field="*{role}" value="BRIGADIER"> Бригадир<Br>-->
+<!--                        <input type="radio" name="Role" th:field="*{role}" value="ADMIN"> Админ<Br>-->
+<!--                        <input type="radio" name="Role" th:field="*{role}" value="USER"> Работник<Br>-->
+<!--                    </div>-->
+                    <label>Role</label>
+                    <div th:each="model : ${T(com.example.furniture_factory.model.employee.RoleEnum).values()}">
+                        <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" th:field="*{role}" th:value="${model}" class="custom-control-input">
+                                    <label   th:text="${model}">model</label>
+                        </div>
+                    </div>
+                    <label>brigades</label>
+                    <div th:each="brigade : ${brigades}">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" name="brigade" th:value="${brigade.id}" class="custom-control-input">
+                            <label   th:text="${brigade.name}"></label>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+
+                    <p th:text="${text}"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
