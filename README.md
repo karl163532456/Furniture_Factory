@@ -5,8 +5,6 @@ clone the project
 
 ```shell
 git clone https://github.com/karl163532456/Furniture_Factory.git Furniture_Factory
-
-cd pizza-app/
 ```
 
 ### Built With
