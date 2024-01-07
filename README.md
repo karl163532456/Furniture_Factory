@@ -34,7 +34,7 @@ localhost:8181
 localhost:5432
 ```
 ### PGAdmin
-'''shell
+```shell
 localhost:5050
-'''
+```
 
