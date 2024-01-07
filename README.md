@@ -29,7 +29,7 @@ docker compose up
 ```shell
 localhost:8181
 ```
-### Databese
+### Database
 ```shell
 localhost:5432
 ```
