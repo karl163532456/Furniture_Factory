@@ -1,13 +1,10 @@
 package com.example.furniture_factory.controllers;
 
-import com.example.furniture_factory.model.WorkOrder.WorkEmployee;
 import com.example.furniture_factory.model.WorkOrder.WorkOrder;
 import com.example.furniture_factory.model.employee.Employee;
 import com.example.furniture_factory.model.employee.RoleEnum;
-import com.example.furniture_factory.model.employee.Schedule;
 import com.example.furniture_factory.model.repo.*;
 import com.example.furniture_factory.model.other.Brigade;
-import com.example.furniture_factory.servise.admin.AdminService;
 import com.example.furniture_factory.servise.foreman.ForemanService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,21 +30,23 @@ public class HomeController {
         //Вход
     @GetMapping("/login")
     String login(Model model){
-        return "login";
+        return "Login";
     }
     @GetMapping("/")
     String home(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Employee employee=employeeRepo.findByLogin(auth.getName()).orElseThrow();
-        RoleEnum roleEnum=employee.getRole();
-        if(roleEnum==RoleEnum.ADMIN)
-            return "redirect:/admin/home";
-        else if(roleEnum==RoleEnum.USER)
-            return "redirect:/User";
-        else if(roleEnum==RoleEnum.BRIGADIER)
-            return "redirect:/Brigadier";
-        else
-            return "login";
+        Employee employee=employeeRepo.findByLogin(auth.getName()).orElse(null);
+        if (employee==null)
+            return "Login";
+        else{
+            RoleEnum roleEnum=employee.getRole();
+            if(roleEnum==RoleEnum.ADMIN)
+                return "redirect:/admin/home";
+            else if(roleEnum==RoleEnum.BRIGADIER)
+                return "redirect:/User";
+            else
+                return "redirect:/Brigadier";
+        }
     }
     //Работник
     @GetMapping("/User")
