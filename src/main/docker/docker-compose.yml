@@ -1,0 +1,43 @@
+services:
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=0391
+      - POSTGRES_DB=postgres2
+
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4:7.2
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
+  app:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    ports:
+      - "8181:8181"
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SERVER_PORT= 8181
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres2
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=0391
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+volumes:
+  pgadmin-data:
+
+
+
