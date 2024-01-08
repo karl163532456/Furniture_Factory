@@ -21,6 +21,9 @@ docker compose up
 ```
 
 ## Configuration
+## administrator
+login: 'john_doe'
+password: 'password123'
 
 
 ### Backend
